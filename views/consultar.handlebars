@@ -1,0 +1,147 @@
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+}
+    .navbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 8vh;
+        background-color: black;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+    a{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        letter-spacing: 2px;
+        margin: 0 1rem;
+        transition: 0.3s;
+        text-decoration: none;
+        color: white;
+    }
+
+    a:hover {opacity: 0.7;}
+
+    ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    li {
+        list-style-type: none;
+        position: relative;
+    }
+
+    .form{
+        margin: 0 auto;
+        position: relative;
+        top: 20px;
+        border: 10px solid;
+        background-color: black;
+        border-radius: 20px;
+        padding: 5;
+        width: 1000px;
+        height: 500px;
+    }
+
+    .title{
+        color: #eee;
+        font-family: sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    table {
+        border-collapse: collapse;
+        border: 2px solid rgb(255, 255, 255);
+        font-family: sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        height: 50px;
+        position: relative;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    th,td {
+        border: 1px solid rgb(255, 255, 255);
+        padding: 8px 10px;
+        color: #eee;
+    }
+
+    .delete{
+        background-color: rgba(0, 0, 0, 0);
+        border-radius: 8px;
+        border-width: 0;
+        color: #eee;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        letter-spacing: 2px;
+        margin: 0 1rem;
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: 500;
+        line-height: 20px;
+        list-style: none;
+        margin: 0;
+        padding: 10px 12px;
+        text-align: center;
+        transition: all 200ms;
+        vertical-align: baseline;
+        white-space: nowrap;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        margin: 0 auto;
+        display: flex;
+    }
+
+
+</style>
+    <!-- NavBar -->
+<div class="navbar">
+    <ul>
+        <li><a href="/">Cadastrar </a></li>
+        <li><a href="/consultar">Consultar </a></li>
+    </ul>
+</div>
+
+<form action="/consultar" method="GET">
+    <div class="form">
+    <div class="title">Consultar - Agendamentos de Potenciais Clientes</div>
+    <table>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Origem</th>
+            <th scope="col">Data de Contato</th>
+            <th scope="col">Observação</th>
+            <th scope="col">Ações</th>
+        </tr>
+
+        {{#each agendamentos}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.nome}}</td>
+            <td>{{this.telefone}}</td>
+            <td>{{this.origem}}</td> 
+            <td>{{this.data_contato}}</td>
+            <td>{{this.observacao}}</td>
+            <td>
+                <a href="/atualizar/{{this.id}}">Atualizar</a><br>
+                <form action="/consultar/excluir/{{this.id}}" method="POST">
+                    <button type="submit" class="delete">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
+</form>

@@ -1,0 +1,134 @@
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+}
+    .navbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 8vh;
+        background-color: black;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+    a{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        letter-spacing: 2px;
+        margin: 0 1rem;
+        transition: 0.3s;
+        text-decoration: none;
+        color: white;
+    }
+
+    a:hover {opacity: 0.7;}
+
+    ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    li {
+        list-style-type: none;
+        position: relative;
+    }
+
+    .form{
+        margin: 0 auto;
+        position: relative;
+        top: 20px;
+        border: 10px solid;
+        background-color: black;
+        border-radius: 20px;
+        padding: 5;
+        width: 500px;
+        height: 500px;
+    }
+
+    .title{
+        color: #eee;
+        font-family: sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .container{
+        height: 50px;
+        position: relative;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .input{
+        background-color: #303245;
+        border-radius: 12px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        font-size: 18px;
+        height: 100%;
+        outline: 0;
+        padding: 4px 20px 0;
+        width: 100%;
+    }
+
+    .submit {
+        background-color: #08d;
+        border-radius: 12px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        cursor: pointer;
+        font-size: 18px;
+        height: 50px;
+        margin-top: 20px;
+        // outline: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .submit:active {
+        background-color: #06b;
+    }
+
+</style>
+    <!-- NavBar -->
+<div class="navbar">
+    <ul>
+        <li><a href="/">Cadastrar </a></li>
+        <li><a href="/consultar">Consultar </a></li>
+    </ul>
+</div>
+
+<form action="/atualizar/{{agendamento.id}}" method="POST">
+        <div class="form">
+            <input type="hidden" name="_method" value="PUT"> <!-- Método POST com _method PUT para simular PUT em formulários HTML -->
+            <input type="hidden" name="id" value="{{agendamento.id}}">
+            <div class="title">Atualizar - Agendamentos de Potenciais Clientes</div>
+            <div class="container">
+                <input id="nome" name="nome" class="input" type="name" value="{{agendamento.nome}}">
+            </div>
+            <div class="container">
+                <input id="telefone" name="telefone" class="input" type="text" placeholder="Telefone" value="{{agendamento.telefone}}">
+            </div>
+            <div class="container">
+                <select name="origem" class="input">
+                    <option value="" disabled>Origem</option>
+                    <option value="celular" {{#if condicaoCelular}} selected {{/if}}>Celular</option>
+                    <option value="whatsapp" {{#if condicaoWhatsapp}} selected {{/if}}>Whatsapp</option>
+                    <option value="Telefone_fixo" {{#if condicaoFixo}} selected {{/if}}>Telefone fixo</option>
+                </select>
+            </div>
+            <div class="container">
+                <input id="data_contato" name="data_contato" class="input" type="date" placeholder="Data de contato" value="{{agendamento.data_contato}}">
+            </div>
+            <div class="container">
+                <input id="observacao" name="observacao" class="input" type="text" placeholder="Observação" value="{{agendamento.observacao}}">
+            </div>
+            <button type="submit" class="submit">Atualizar</button>
+        </div>
+</form>
